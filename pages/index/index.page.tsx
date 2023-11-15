@@ -1,18 +1,19 @@
 import { Counter } from './Counter'
+import Split from 'react-split-it'
 
 export { Page }
 
 function Page() {
   return (
     <>
-      <h1>Welcome</h1>
-      This page is:
-      <ul>
-        <li>Rendered to HTML.</li>
-        <li>
-          Interactive. <Counter />
-        </li>
-      </ul>
+       <Split style={{flexGrow: 1}} direction="horizontal">
+         <div style={{ height: '100%'}} className="leftContentContainer">
+           Chat goes here
+         </div>
+         <div style={{ height: '100%'}} className="RightContentContainer">
+           Map goes here
+         </div>
+       </Split>
     </>
   )
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import logo from './logo.svg'
 import { PageContextProvider } from './usePageContext'
 import type { PageContext } from './types'
-import Split from 'react-split-it';
 import './PageShell.css'
 import { Link } from './Link'
 
@@ -12,14 +11,9 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
   return (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
-        <Split style={{flexGrow: 1}} direction="horizontal">
-          <div style={{ height: '100%'}} className="leftContentContainer">
-            Chat goes here
-          </div>
-          <div style={{ height: '100%'}} className="RightContentContainer">
-            Map goes here
-          </div>
-        </Split>
+        <Layout>
+          {children}
+        </Layout>
       </PageContextProvider>
     </React.StrictMode>
   )
@@ -30,25 +24,23 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div
       style={{
         display: 'flex',
-        maxWidth: 900,
-        margin: 'auto'
+        flexDirection: 'column',
       }}
     >
-      {children}
+      <Header><h1>Header</h1></Header>
+      <div style={{height: 'calc(100vh - 60px)'}}>
+        {children}
+      </div>
     </div>
   )
 }
 
-function Sidebar({ children }: { children: React.ReactNode }) {
+function Header({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{
-        padding: 20,
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        lineHeight: '1.8em'
+        backgroundColor: '#eee',
+        height: 60,
       }}
     >
       {children}
