@@ -2,6 +2,7 @@ import React from 'react'
 import logo from './logo.svg'
 import { PageContextProvider } from './usePageContext'
 import type { PageContext } from './types'
+import Split from 'react-split-it';
 import './PageShell.css'
 import { Link } from './Link'
 
@@ -11,18 +12,14 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
   return (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
-        <Layout>
-          <Sidebar>
-            <Logo />
-            <Link className="navitem" href="/">
-              Home
-            </Link>
-            <Link className="navitem" href="/about">
-              About
-            </Link>
-          </Sidebar>
-          <Content>{children}</Content>
-        </Layout>
+        <Split style={{flexGrow: 1}} direction="horizontal">
+          <div style={{ height: '100%'}} className="leftContentContainer">
+            Chat goes here
+          </div>
+          <div style={{ height: '100%'}} className="RightContentContainer">
+            Map goes here
+          </div>
+        </Split>
       </PageContextProvider>
     </React.StrictMode>
   )
