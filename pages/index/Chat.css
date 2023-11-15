@@ -1,0 +1,35 @@
+.messageOptions {
+  margin-top: 12px;
+  margin-bottom: -12px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+div.rce-mbox-title {
+  font-size: 15px;
+}
+
+div.rce-mbox-text {
+  font-size: 14px;
+}
+
+.messageListContainer {
+  height: calc(100vh - 82px);
+}
+
+.message-list {
+  height: 100%;
+}
+
+.rce-mlist {
+  display: block;
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  height: 100%;
+}
+
+.rce-mbox-body > .rce-mbox-text.left > div > code {
+  background-color: #eeeeee;
+}
