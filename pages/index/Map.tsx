@@ -9,7 +9,7 @@ function Map() {
   const zoom = 17;
 
   return (
-    <Wrapper apiKey={"AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o"} style={{height: '100%'}}>
+    <Wrapper apiKey={"AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o"}>
       <MyMapComponent center={center} zoom={zoom} mapTypeId="satellite" />
     </Wrapper>
   )

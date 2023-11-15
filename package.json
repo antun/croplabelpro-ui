@@ -34,5 +34,8 @@
     "vike": "^0.4.146",
     "vite": "^4.4.9"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/googlemaps": "^3.43.3"
+  }
 }
