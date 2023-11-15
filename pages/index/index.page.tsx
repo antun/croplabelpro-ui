@@ -1,5 +1,5 @@
-import { Counter } from './Counter'
 import Split from 'react-split-it'
+import { Map } from './Map'
 
 export { Page }
 
@@ -11,7 +11,7 @@ function Page() {
            Chat goes here
          </div>
          <div style={{ height: '100%'}} className="RightContentContainer">
-           Map goes here
+           <Map />
          </div>
        </Split>
     </>
