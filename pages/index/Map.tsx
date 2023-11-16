@@ -4,27 +4,35 @@ import './code.css'
 
 export { Map }
 
-function Map() {
+function Map({onMapMove}) {
   const center = { lat: -19.596785, lng: -45.998827 };
   const zoom = 17;
-
+  
   return (
     <Wrapper apiKey={"AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o"}>
-      <MyMapComponent center={center} zoom={zoom} mapTypeId="satellite" />
+      <MyMapComponent center={center} zoom={zoom} mapTypeId="satellite" onMapMove={onMapMove}/>
     </Wrapper>
   )
 }
 
-function MyMapComponent({ center, zoom, mapTypeId }: { center: google.maps.LatLngLiteral; zoom: number; mapTypeId: string }) {
+function MyMapComponent({ center, zoom, mapTypeId, onMapMove }: { center: google.maps.LatLngLiteral; zoom: number; mapTypeId: string }) {
   const ref = useRef();
+  if (ref.current) {
+    console.log('@@@ ref', ref);
+  }
 
   useEffect(() => {
-    new window.google.maps.Map(ref.current, {
+    const mapObj = new window.google.maps.Map(ref.current, {
       center,
       zoom,
       mapTypeId
     });
-  });
+
+    mapObj.addListener('bounds_changed', () => {
+      onMapMove(mapObj.center.lat(), mapObj.center.lng());
+    });
+
+  }, []);
 
   return <div ref={ref} id="map" />;
 }
