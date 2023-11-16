@@ -9,7 +9,7 @@ import 'react-chat-elements/dist/main.css';
 
 export { Chat }
 
-function Chat({onAnalyzeClick}) {
+function Chat({onAnalyzeClick, onBackToMapClick, mapMode}) {
 
   const messageListItems = [
       <MessageBox
@@ -27,7 +27,7 @@ function Chat({onAnalyzeClick}) {
   ];
   return (
     <div style={{height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Controls onAnalyzeClick={onAnalyzeClick}/>
+      <Controls onAnalyzeClick={onAnalyzeClick} onBackToMapClick={onBackToMapClick} mapMode={mapMode} />
       <div className="messageListContainer">
         {/* @ts-ignore TS2322 */}
         <div className="message-list">
