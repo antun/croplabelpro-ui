@@ -33,7 +33,9 @@ function Layout({ children }: { children: React.ReactNode }) {
         flexDirection: 'column',
       }}
     >
-      <Header><h1>Header</h1></Header>
+      <Header>
+        <h1 style={{color: '#ffffff', margin: '10px'}}>CropLabel Pro</h1>
+      </Header>
       <div style={{height: 'calc(100vh - 60px)'}}>
         {children}
       </div>
@@ -45,7 +47,7 @@ function Header({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{
-        backgroundColor: '#eee',
+        backgroundColor: '#000000',
         height: 60,
       }}
     >

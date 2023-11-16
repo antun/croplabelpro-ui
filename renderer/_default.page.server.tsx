@@ -20,8 +20,8 @@ async function render(pageContext: PageContextServer) {
 
   // See https://vike.dev/head
   const { documentProps } = pageContext.exports
-  const title = (documentProps && documentProps.title) || 'Vite SSR app'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + Vike'
+  const title = (documentProps && documentProps.title) || 'CropLabel Pro'
+  const desc = (documentProps && documentProps.description) || 'AI-powered crop labeling tool'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
