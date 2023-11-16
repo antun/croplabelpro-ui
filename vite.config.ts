@@ -10,7 +10,10 @@ export default ({command})  => {
     // Build
     return {
       plugins: [react(), vike({prerender: true})],
+      base: '/',
+      /*
       base: '/~antun/genlab-hackathon',
+      */
       build: {
         outDir: 'dist',
         sourcemap: true,
@@ -19,13 +22,13 @@ export default ({command})  => {
         noExternal: [
           /*
           '@reduxjs/toolkit',
+          */
           '@mui/material',
           '@mui/system',
           '@mui/lab',
           '@mui/base',
           '@mui/styled-engine',
           '@mui/material/styles',
-          */
         ]
       }
     }

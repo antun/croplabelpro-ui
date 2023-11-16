@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "npm run server:dev",
     "prod": "npm run lint && npm run build && npm run server:prod",
+    "deploy": "npm run build && rsync -r dist/client/ dh_3tkg8a@pdx1-shared-a2-02.dreamhost.com:croplabelpro.antun.com",
     "build": "vite build",
     "server": "node --loader ts-node/esm ./server/index.ts",
     "server:dev": "npm run server",
