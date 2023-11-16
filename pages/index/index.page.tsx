@@ -15,6 +15,30 @@ function Page() {
   const [staticMapUrl, setStaticMapUrl] = useState('');
   const [segmentedMapUrl, setSegmentedMapUrl] = useState('');
   const [mapLoading, setMapLoading] = useState(false);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [userMessage, setUserMessage] = useState('');
+
+  const writeFirstChatMessage = (segments) => {
+    const message = {
+      position: 'left',
+      title: 'CropLabel Pro',
+      type: 'text',
+      text: `Please tell me what is planted in each of the following fields, and when it was planted: <br />${segments.replaceAll('\n', '<br />')}`,
+    };
+    setChatMessages([message]);
+
+    /*
+    const assistantPayload = {
+      "assistant_id": "asst_qVGwKu0Sg7nubSYC74LxfEfK",
+      "thread": {
+        "messages": [
+          {"role": "user", "content": "based on the following segments, ask the user to tell you what crop and when planted each of them: "+ AI_text_response}
+        ]
+      }
+    };
+    */
+
+  }
 
   const handleAnalyzeClick = () => {
     const coordinateString = `${coordinates.current.lat},${coordinates.current.lng}`;
@@ -34,6 +58,7 @@ function Page() {
       setMapLoading(false);
       setMapMode('segmented');
       setSegmentedMapUrl(response.data.segmentedImageUrl);
+      writeFirstChatMessage(response.data.segments);
     })
     .catch(function (error) {
       setMapLoading(false);
@@ -43,6 +68,7 @@ function Page() {
   
   const handleBackToMapClick = () => {
     setMapMode('movable');
+    setChatMessages([]);
   };
   
   const handleMapMove = (lat, lng) => {
@@ -50,11 +76,29 @@ function Page() {
     console.log('handleMapMove', coordinates.current);
   };
 
+  const handleUserMessage = (m) => {
+    setUserMessage(m);
+  };
+
+  const handleSend = () => {
+    const message = {
+      position: 'right',
+      title: 'User',
+      type: 'text',
+      text: userMessage
+    };
+    setChatMessages([...chatMessages, message]);
+    setUserMessage('');
+  };
+
+
+
   return (
     <>
        <Split style={{flexGrow: 1}} direction="horizontal">
          <div style={{ height: '100%'}} className="leftContentContainer">
-           <Chat onAnalyzeClick={handleAnalyzeClick} onBackToMapClick={handleBackToMapClick} mapMode={mapMode} />
+           <Chat onAnalyzeClick={handleAnalyzeClick} onBackToMapClick={handleBackToMapClick} mapMode={mapMode} 
+                 chatMessages={chatMessages} userMessage={userMessage} onUserMessage={handleUserMessage} onSend={handleSend} />
          </div>
          <div style={{ height: '100%'}} className="RightContentContainer">
            { mapMode === 'movable' && <Map onMapMove={handleMapMove} /> }

@@ -6,23 +6,25 @@ import TextField from '@mui/material/TextField';
 
 export { ChatInput }
 
-function ChatInput() {
+function ChatInput({userMessage, onUserMessage, onSend}) {
   return (
       <Box sx={{ display: 'flex' }} padding={1}>
         <Box sx={{ flexGrow: 1 }}>
-          <TextField value={'userMessage'}
+          <TextField value={userMessage}
             size="small"
             sx={{ width: '100%' }}
+            onChange={(e) => {
+              onUserMessage(e.target.value);
+            }}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                // handleSend();
-                console.log('blah');
+                onSend();
               }
             }}
           />
 
         </Box>
-        <Button variant="contained" >
+        <Button variant="contained" onClick={onSend}>
           Send
         </Button>
       </Box>
