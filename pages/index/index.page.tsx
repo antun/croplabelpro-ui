@@ -4,6 +4,7 @@ import { Map } from './Map'
 import { Chat } from './Chat'
 import StaticMap from './StaticMap' 
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 
 export { Page }
 
@@ -13,12 +14,14 @@ function Page() {
   const [mapMode, setMapMode] = useState('movable');
   const [staticMapUrl, setStaticMapUrl] = useState('');
   const [segmentedMapUrl, setSegmentedMapUrl] = useState('');
+  const [mapLoading, setMapLoading] = useState(false);
 
   const handleAnalyzeClick = () => {
     const coordinateString = `${coordinates.current.lat},${coordinates.current.lng}`;
     const url = `https://maps.googleapis.com/maps/api/staticmap?size=640x480&maptype=satellite&center=${coordinateString}&key=AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o&zoom=17&scale=2`;
     setMapMode('static');
     setStaticMapUrl(url);
+    setMapLoading(true);
     axios.post('https://us-central1-genlabhackathon.cloudfunctions.net/analyze', {
       action: 'analyze',
       rawImageUrl: url
@@ -28,10 +31,12 @@ function Page() {
       }
     })
     .then(function (response) {
+      setMapLoading(false);
       setMapMode('segmented');
       setSegmentedMapUrl(response.data.segmentedImageUrl);
     })
     .catch(function (error) {
+      setMapLoading(false);
       console.log(error);
     });
   };
@@ -54,6 +59,8 @@ function Page() {
          <div style={{ height: '100%'}} className="RightContentContainer">
            { mapMode === 'movable' && <Map onMapMove={handleMapMove} /> }
            { (mapMode === 'static' || mapMode === 'segmented') && <StaticMap onMapMove={handleMapMove} staticUrl={staticMapUrl}  segmentedMapUrl={segmentedMapUrl} mapMode={mapMode} /> }
+
+           { mapLoading && <div style={{position: 'absolute', top: '0px', left: '0px', display: 'flex', height: '100%', width: '100%', justifyContent: 'center'}}><CircularProgress sx={{margin: 20}} /> </div> }
          </div>
        </Split>
     </>
