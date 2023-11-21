@@ -12,7 +12,7 @@ export default ({command})  => {
       plugins: [react(), vike({prerender: true})],
       base: '/',
       /*
-      base: '/~antun/genlab-hackathon',
+      base: '/~antun/croplabelpro-ui',
       */
       build: {
         outDir: 'dist',

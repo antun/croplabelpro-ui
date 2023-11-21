@@ -2,6 +2,8 @@ import { Wrapper } from "@googlemaps/react-wrapper";
 import { useEffect, useRef } from "react";
 import './code.css'
 
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
 export { Map }
 
 function Map({onMapMove}) {
@@ -9,7 +11,7 @@ function Map({onMapMove}) {
   const zoom = 17;
   
   return (
-    <Wrapper apiKey={"AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o"}>
+    <Wrapper apiKey={apiKey}>
       <MyMapComponent center={center} zoom={zoom} mapTypeId="satellite" onMapMove={onMapMove}/>
     </Wrapper>
   )

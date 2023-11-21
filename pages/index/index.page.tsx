@@ -6,6 +6,8 @@ import StaticMap from './StaticMap'
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
 export { Page }
 
 function Page() {
@@ -42,7 +44,7 @@ function Page() {
 
   const handleAnalyzeClick = () => {
     const coordinateString = `${coordinates.current.lat},${coordinates.current.lng}`;
-    const url = `https://maps.googleapis.com/maps/api/staticmap?size=640x480&maptype=satellite&center=${coordinateString}&key=AIzaSyBj92vPkR0DBR6emjqohYXorNPVePsUl5o&zoom=17&scale=2`;
+    const url = `https://maps.googleapis.com/maps/api/staticmap?size=640x480&maptype=satellite&center=${coordinateString}&key=${apiKey}&zoom=17&scale=2`;
     setMapMode('static');
     setStaticMapUrl(url);
     setMapLoading(true);
